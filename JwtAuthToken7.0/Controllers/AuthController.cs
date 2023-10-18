@@ -9,5 +9,18 @@ namespace JwtAuthToken7._0.Controllers
     public class AuthController : ControllerBase
     {
         public static User user = new User();
+
+        [HttpPost("register")]
+
+        public ActionResult<User> Register(UserRequest request)
+        {
+            string passwordHash
+                = BCrypt.Net.BCrypt.HashPassword(request.Password);
+
+            user.Username = request.Username;
+            user.PasswordHash = passwordHash;
+            
+            return Ok(user);
+        }
     }
 }
