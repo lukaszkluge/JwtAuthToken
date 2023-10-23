@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\JwtAuthToken7.0.props" />
+</Project>

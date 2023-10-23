@@ -1,6 +1,7 @@
 ﻿using JwtAuthToken7._0.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace JwtAuthToken7._0.Controllers
 {
@@ -39,6 +40,13 @@ namespace JwtAuthToken7._0.Controllers
             return Ok(user);
         }
 
+        private string CreateToken(User user)
+        {
+            List<Claim> claims = new List<Claim> { 
+                new Claim(ClaimTypes.Name, user.Username)
+            };
+
+        }
 
     }
 }
