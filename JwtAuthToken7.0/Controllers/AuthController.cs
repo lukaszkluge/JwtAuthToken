@@ -1,7 +1,9 @@
 ﻿using JwtAuthToken7._0.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 using System.Security.Claims;
+using System.Text;
 
 namespace JwtAuthToken7._0.Controllers
 {
@@ -43,7 +45,10 @@ namespace JwtAuthToken7._0.Controllers
             {
                 return BadRequest("Wrong password.");
             }
-            return Ok(user);
+
+            string token = CreateToken(user);
+
+            return Ok(token);
         }
 
         private string CreateToken(User user)
@@ -52,7 +57,21 @@ namespace JwtAuthToken7._0.Controllers
                 new Claim(ClaimTypes.Name, user.Username)
             };
 
-            var key = new SymmetricSecurityKey();
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                _configuration.GetSection("AppSettings:Token").Value!));
+
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmaSha512Signature);
+
+            var token = new JwtSecurityToken(
+                claims: claims,
+                expires: DateTime.Now.AddDays(1),
+                signingCredentials: creds
+                );
+
+            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return jwt;
+
         }
 
     }
