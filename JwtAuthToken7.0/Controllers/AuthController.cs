@@ -10,6 +10,12 @@ namespace JwtAuthToken7._0.Controllers
     public class AuthController : ControllerBase
     {
         public static User user = new User();
+        private readonly IConfiguration _configuration;
+
+        public AuthController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
         [HttpPost("register")]
 
@@ -46,6 +52,7 @@ namespace JwtAuthToken7._0.Controllers
                 new Claim(ClaimTypes.Name, user.Username)
             };
 
+            var key = new SymmetricSecurityKey();
         }
 
     }
