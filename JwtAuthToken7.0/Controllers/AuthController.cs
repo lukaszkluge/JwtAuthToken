@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using System.Security.Claims;
 using System.Text;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+
 
 namespace JwtAuthToken7._0.Controllers
 {
@@ -51,6 +54,7 @@ namespace JwtAuthToken7._0.Controllers
             return Ok(token);
         }
 
+        // NEED SMALL CHANGES
         private string CreateToken(User user)
         {
             List<Claim> claims = new List<Claim> { 
@@ -60,7 +64,7 @@ namespace JwtAuthToken7._0.Controllers
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
                 _configuration.GetSection("AppSettings:Token").Value!));
 
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmaSha512Signature);
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
             var token = new JwtSecurityToken(
                 claims: claims,
