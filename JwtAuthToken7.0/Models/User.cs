@@ -5,6 +5,7 @@
 
         public string Username { get; set; } = string.Empty;
 
+        // The "PasswordHash" property stores the hashed password of the user.
         public string PasswordHash { get; set; } = string.Empty;
     }
 }
