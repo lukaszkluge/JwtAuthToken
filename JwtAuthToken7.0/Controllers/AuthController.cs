@@ -60,7 +60,6 @@ namespace JwtAuthToken7._0.Controllers
                 return BadRequest("Wrong password.");
             }
 
-            // Create a JWT token for user authentication
 
             string token = CreateToken(user);
 
