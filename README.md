@@ -55,8 +55,3 @@ Fork the repository.
 Create a new branch for your feature or bug fix.
 Make your changes and ensure that the code passes any tests.
 Commit your changes and create a pull request.
-
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-Replace `[your-username]` in the repository URL with your actual GitHub username, and ensure you have a valid license file (e.g., `LICENSE`) with the appropriate license text in your project directory. This README provides a starting point, and you can further customize it as needed for your project.
